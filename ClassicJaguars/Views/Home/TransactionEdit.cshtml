@@ -1,0 +1,57 @@
+﻿@model ClassicJaguars.Data.Model.Transaction
+
+@{
+    ViewBag.Title = "Transaction";
+}
+
+<div>
+    <h2>Sales Transaction Add/Edit</h2>
+</div>
+
+<form class="well container" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.TransactionId)
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h4>
+                    <strong>Model Id: </strong>
+                    @Html.TextBoxFor(x => x.ModelId, new { @class = "form-control", placeholder = @Model.ModelId }) <br />
+
+                    <strong>Date Sold:  </strong>
+                    @Html.TextBoxFor(x => x.DateSold, new { @class = "form-control", placeholder = "mm/dd/yyyy" }) <br />
+                    <strong>TransactionType: </strong>
+                    @Html.TextBoxFor(x => x.TransType, new { @class = "form-control", placeholder = "Auction, Dealer, Private, or Other" }) <br />
+                    <strong>Sales Price: </strong>
+                    @Html.TextBoxFor(x => x.SalePrice, new { @class = "form-control", placeholder = "Enter Sales Price" }) <br />
+                    <strong>Model Year: </strong>
+                    @Html.TextBoxFor(x => x.CarYear, new { @class = "form-control", placeholder = "Enter Model year" })<br />
+                    <strong>Mileage: </strong>
+                    @Html.TextBoxFor(x => x.CarMiles, new { @class = "form-control", placeholder = "Enter Mileage" }) <br />
+                    <strong>Matching #'s: </strong>
+                    @Html.TextBoxFor(x => x.NumsMatch, new { @class = "form-control", placeholder = "Enter 'true' or 'false'" }) <br />
+                    <strong>Exterior Color: </strong>
+                    @Html.TextBoxFor(x => x.ExtColor, new { @class = "form-control", placeholder = "Enter Color" }) <br />
+                    <strong>Interior Color: </strong>
+                    @Html.TextBoxFor(x => x.IntColor, new { @class = "form-control", placeholder = "Enter Color" }) <br />
+                    <strong>Seller: </strong>
+                    @Html.TextBoxFor(x => x.SellerName, new { @class = "form-control", placeholder = "Enter Seller Name" }) <br />
+                    <strong>Seller Country: </strong>
+                    @Html.TextBoxFor(x => x.SellerCountry, new { @class = "form-control", placeholder = "Enter Seller Country" }) <br />
+                    <strong>Buyer: </strong>
+                    @Html.TextBoxFor(x => x.BuyerName, new { @class = "form-control", placeholder = "Enter Buyer Name" }) <br />
+                    <strong>Buyer Country: </strong>
+                    @Html.TextBoxFor(x => x.BuyerCountry, new { @class = "form-control", placeholder = "Enter Buyer Country" }) <br />
+                    <strong>Notes: </strong>
+                    @Html.TextAreaFor(x => x.Notes, new { @class = "form-control", placeholder = "Notes..." }) <br />
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+
+    @Html.ValidationSummary("", new { style = "color:red;" })
+</form>

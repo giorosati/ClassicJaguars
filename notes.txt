@@ -1,0 +1,3 @@
+azure SQL database:  classicjagprosDB
+username: giorosati
+password: data5678!

@@ -1,0 +1,61 @@
+﻿@model ClassicJaguars.Data.Model.Car
+
+@{
+    ViewBag.Title = "EditModel";
+}
+
+<h2>Add or Edit a Jaguar Model</h2>
+
+<form class="well container" method="post">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ModelId)
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+
+                @Html.LabelFor(x => x.ModelName)
+                @Html.TextBoxFor(x => x.ModelName, new { @class = "form-control", placeholder = "Enter Model Name" })
+
+                <br />
+
+                @Html.LabelFor(x => x.FirstYear)
+                @Html.TextBoxFor(x => x.FirstYear, new { @class = "form-control", placeholder = "Enter First Year" })
+
+                <br />
+
+                @Html.LabelFor(x => x.LastYear)
+                @Html.TextBoxFor(x => x.LastYear, new { @class = "form-control", placeholder = "Enter Last Year" })
+
+                <br />
+
+                @Html.LabelFor(x => x.UnitsProduced)
+                @Html.TextBoxFor(x => x.UnitsProduced, new { @class = "form-control", placeholder = "Enter Units Produced" })
+
+                <br />
+
+                @Html.LabelFor(x => x.Description)
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", placeholder = "Description" })
+
+                <br />
+
+                @Html.LabelFor(x => x.Synopsis)
+                @Html.TextAreaFor(x => x.Synopsis, new { @class = "form-control", placeholder = "Synopsis" })
+
+                <br />
+
+                @Html.LabelFor(x => x.ImgUrl)
+                @Html.TextAreaFor(x => x.ImgUrl, new { @class = "form-control", placeholder = "ImgUrl" })
+            </div>
+        </div>
+
+        <div class="col=sm-6">
+            <div class="input-lg">
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+
+    @Html.ValidationSummary("", new { style = "color:red;" })
+</form>

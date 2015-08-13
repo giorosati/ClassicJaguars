@@ -1,0 +1,43 @@
+﻿@model List<ClassicJaguars.Data.Model.Transaction>
+
+<br />
+
+@{
+    ViewBag.Title = "Transactions";
+}
+<div>
+    <h2>Transactions</h2>
+</div>
+<br />
+
+<div>
+    <table class="table table-bordered" col-lg-8">
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Date Sold</th>
+                <th>Car Year</th>
+                <th>Sales Price</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model)
+            {
+                if (t.DateDeleted == null)
+                {
+                    <tr>
+                        <td width="80px" style="vertical-align: middle; text-align: center">@t.Car.ModelName</td>
+                        <td width="80px" style="vertical-align: middle; text-align: center">@t.DateSold.Value.ToString("dd MMM yyyy")  </td>
+                        <td width="80px" style="vertical-align: middle; text-align: center">@t.CarYear</td>
+                        <td width="80px" style="vertical-align: middle; text-align: center">@String.Format("{0:c0}", @t.SalePrice)</td>
+                        <td width="80px" style="vertical-align: middle; text-align: center">@t.Notes</td>
+                        <td width="80px" style=" vertical-align: middle; text-align: center"><a href="/Home/TransactionDetails/@t.TransactionId" class="btn btn-success">View Details</a></td>
+                    </tr>
+                    <tr></tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

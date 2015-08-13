@@ -1,0 +1,42 @@
+﻿@model ClassicJaguars.Data.Model.Car
+
+@{
+    ViewBag.Title = "CarDetails";
+}
+
+<div class="inline">
+    <h2>@Model.ModelName Details</h2>
+    </div>
+<div class="inline">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <a href="/Home/EditModel/@Model.ModelId" class="btn btn-warning">Edit</a>
+            <a href="/Home/DeleteModel/@Model.ModelId" class="btn btn-danger">Delete</a>
+        }
+    }
+</div>
+
+<div class="well container">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ModelId)
+
+    <div class="visible-lg-inline"><strong style="color:darkgreen">Model Name: &nbsp;&nbsp;</strong> @Model.ModelName </div><br />
+    <strong style="color:darkgreen">First year produced: &nbsp;&nbsp;</strong> @Model.FirstYear <br />
+    <strong style="color:darkgreen">Last year produced: &nbsp;&nbsp;</strong> @Model.LastYear <br />
+    <strong style="color:darkgreen">Units Produced: &nbsp;&nbsp;</strong> @String.Format("{0:#,##0}", @Model.UnitsProduced) <br /><br />
+    <strong style="color:darkgreen">Description: </strong>
+    <p> @Model.Description </p><br />
+    <strong style="color:darkgreen">Synopsis: </strong>
+    <p> @Model.Synopsis </p><br />
+    @*<strong style="color:darkgreen">Image Url: </strong><br /> @Model.ImgUrl <br />
+    <br />*@
+    <img class="img-responsive" src="@Model.ImgUrl" />
+    <br />
+</div>
+<div>
+    @*put a return button here*@
+</div>
+
+@Html.ValidationSummary("", new { style = "color:red;" })

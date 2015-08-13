@@ -1,0 +1,83 @@
+﻿@model List<ClassicJaguars.Data.Model.Car>
+
+@{
+    ViewBag.Title = "Classic Jag Pros";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="inline">
+        <h2>Classic Jaguar Models</h2>
+    </div>
+    <div class="inline">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <a href="/Home/CreateModel/" class="btn btn-success">Add a Jag Model</a>
+
+            }
+        }
+    </div>
+    <div>
+        <table class="table table-bordered col-lg-8">
+            <thead>
+                <tr>
+                    <th>Model Name</th>
+                    <th>1st yr Made</th>
+                    <th> - </th>
+                    <th>Last yr Made</th>
+                    <th># Units Made</th>
+                    <th>Image</th>
+                    <th>Details:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var j in Model)
+                {
+                    if (j.DateDeleted == null)
+                    {
+                        <tr>
+                            <td width="80px" style="vertical-align: middle; text-align: center">@j.ModelName</td>
+                            <td width="50px" style="vertical-align: middle; text-align: center">@j.FirstYear</td>
+                            <td width="5px" style="vertical-align: middle; text-align: center"> - </td>
+                            <td width="50px" style="vertical-align: middle; text-align: center">@j.LastYear</td>
+                            <td width="50px" style="vertical-align: middle; text-align: center">@String.Format("{0:#,##0}", @j.UnitsProduced)</td>
+                            <td width="60%" style="vertical-align: middle; text-align: center"><img class="img-responsive" src="@j.ImgUrl" /></td>
+                            <td width="30px" style="vertical-align: middle; text-align: center">
+                                <a href="/Home/CarDetails/@j.ModelId" class="btn btn-success">@j.ModelName Details</a>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("User") || User.IsInRole("Admin"))
+                                    {
+                                        <hr />
+                                        <a href="/Home/ModelTrans/@j.ModelId" class="btn btn-success">View Transactions</a>
+                                    }
+                                }
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <hr />
+                                        <a href="/Home/TransactionAdd/@j.ModelId" class="btn btn-success">Add Transaction</a>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr></tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="inline"><h3>Welcome to Classic Jag Pros!</h3></div>
+    <div class="inline pull-right"><h4>Please log in or register above</h4></div>
+    <div class="jumbotron">
+        <img src="~/Images/e-type__with_jaguar_logo.jpg" class="img-responsive" />
+    </div>
+}

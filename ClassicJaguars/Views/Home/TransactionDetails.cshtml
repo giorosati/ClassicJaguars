@@ -1,0 +1,47 @@
+﻿@model ClassicJaguars.Data.Model.Transaction
+
+@{
+    ViewBag.Title = "TransactionDetails";
+}
+
+<div class="inline">
+    <h2>Transaction Details</h2>
+</div>
+<div class="inline">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <a href="/Home/TransactionEdit/@Model.TransactionId" class="btn btn-success">Edit</a>
+            <a href="/Home/TransactionDelete/@Model.TransactionId/@Model.ModelId" class="btn btn-danger">Delete</a>
+        }
+    }
+</div>
+
+<div class="well container">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.TransactionId)
+    <h4>
+        <strong style="color:darkgreen">Date Sold:  </strong> @Model.DateSold.Value.ToString("dd MMM yyyy") @*: "Date is Empty")*@ <br />
+        <strong style="color:darkgreen">Model Id: </strong> @Model.ModelId <br />
+        <strong style="color:darkgreen">Model Year: </strong> @Model.CarYear <br />
+        <strong style="color:darkgreen">Mileage: </strong> @String.Format("{0:#,##0}", @Model.CarMiles) <br />
+        <strong style="color:darkgreen">Matching #'s: </strong> @Model.NumsMatch <br />
+        <strong style="color:darkgreen">Exterior Color: </strong> @Model.ExtColor <br />
+        <strong style="color:darkgreen">Interior Color: </strong> @Model.IntColor <br />
+        <strong style="color:darkgreen">Transaction Type: </strong> @Model.TransType <br />
+        <strong style="color:darkgreen">Sales Price: </strong> @String.Format("{0:c0}", @Model.SalePrice) <br />
+        <strong style="color:darkgreen">Seller: </strong> @Model.SellerName <br />
+        <strong style="color:darkgreen">Seller Country: </strong> @Model.SellerCountry <br />
+        <strong style="color:darkgreen">Buyer: </strong> @Model.BuyerName <br />
+        <strong style="color:darkgreen">Buyer Country: </strong> @Model.BuyerCountry <br />
+        <strong style="color:darkgreen">Notes:</strong> <br />
+        <textarea width="600px">@Model.Notes</textarea>
+        <br />
+    </h4>
+</div>
+<div>
+    @*put a return button here*@
+</div>
+
+@Html.ValidationSummary("", new { style = "color:red;" })
